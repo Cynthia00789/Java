@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+public class Game {
+
+	public static void main(String[] args) {
+		//石头剪子布的游戏，电脑或用户赢两次以上就获胜，游戏结束
+		Scanner input = new Scanner(System.in);
+		int pc_user_Win = 0;//1 userwin,2 pcwin
+		int pc_user_WinLastTime = 0;
+		int pcData = 0;
+		int userData = 0;
+		System.out.println("石头、剪子、布游戏，由用户和电脑玩，谁连续赢两次就胜出！");
+		while(true){
+			pcData = (int)(Math.random()*3);
+			System.out.print("玩家请输入，0是石头、1是剪刀、2是布:");
+			userData = input.nextInt();
+			
+			//统计谁赢，并将pc_user_Win标志位赋值，输出显示赢家
+			switch(userData){
+			case 0:{
+				if(userData - pcData == -2){
+					pc_user_Win = 2;
+					System.out.println("Pc Win!");
+					break;
+				}
+				else if(userData - pcData == -1){
+					pc_user_Win = 1;
+					System.out.println("User Win!");
+					break;
+				}
+				else{
+					System.out.println("User and Pc is same!");
+					break;
+				}
+			}
+			case 1:{
+				if(userData - pcData == 1){
+					pc_user_Win = 2;
+					System.out.println("Pc Win!");
+					break;
+				}
+				else if(userData - pcData == -1){
+					pc_user_Win = 1;
+					System.out.println("User Win!");
+					break;
+				}
+				else{
+					System.out.println("User and Pc is same!");
+					break;
+				}
+			}
+			case 2:{
+				if(userData - pcData == 1){
+					pc_user_Win = 2;
+					System.out.println("Pc Win!");
+					break;
+				}
+				else if(userData - pcData == 2){
+					pc_user_Win = 1;
+					System.out.println("User Win!");
+					break;
+				}
+				else{
+					System.out.println("User and Pc is same!");
+					break;
+				}
+			}
+			}
+			
+			//判断是否连续赢两次，是就输出谁赢，并结束循环
+			if(pc_user_Win != 0){//排除因为等于零的情况的误判，因为等于零代表没有胜负
+				if(pc_user_WinLastTime == pc_user_Win && pc_user_Win == 1){
+					System.out.println("User Win the game!");
+					break;
+				}
+					
+				else if(pc_user_WinLastTime == pc_user_Win && pc_user_Win == 2){
+					System.out.println("Pc Win the game!");
+					break;
+				}
+			}
+			
+			//只有将非零的胜负标志值赋值给记录上一次胜负情况的标志位
+			//否则可能出现pc赢一次，平一次，再赢一次而不显示pc获胜的情况
+			if(pc_user_Win == 0);
+			else
+				pc_user_WinLastTime = pc_user_Win;
+			pc_user_Win = 0;//将标志位置为无效，否则将影响下一次判断
+		}
+	}
+
+}
