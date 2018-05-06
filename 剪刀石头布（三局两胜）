@@ -1,0 +1,57 @@
+import java.util.*;
+import java.util.Scanner;  
+public class SrpGame{ 
+    public static void main(String[] args) { 
+     int num1=0,num2=0;
+     while (true)
+     {
+        int computer= (int) (Math.random()*3);   //产生一个0~2的随机数并赋给计算机
+        Scanner input=new Scanner(System.in);   
+         
+        System.out.print("请玩家输入：石头(0),剪刀(1),布(2) ");
+        int user=input.nextInt();               //用户端输入
+        if (user> 2 || user < 0)                //如果用户输入数不在0~2间，则会要求重新输入本次数据
+        continue;
+        System.out.print("PC:");
+        switch(computer)                        //识别计算机的数并对应输出scissor、rock或者paper
+        {
+        case 0:
+             System.out.print("石头. ");break;
+        case 1:
+             System.out.print("剪刀.");break;
+        case 2:
+             System.out.print("布.");break;
+        }
+        switch(user)                             //识别用户输入的数并对应输出scissor、rock或者paper
+        {
+        case 0:
+             System.out.println(" User:石头.");break;
+        case 1:
+             System.out.println(" User:剪刀. ");break;
+        case 2:
+             System.out.println(" User:布. ");break;
+        }
+      //比较computer和user的数据.
+        if (computer == user)                    //平局
+         System.out.println("平局");
+        else if (user== ++ computer ||(computer == 2 && user ==0))  //user比computer大1或者computer为2时user为0
+        {
+          System.out.println("PC won");
+          num1++;
+        }
+        else
+        {
+         System.out.println("You won");
+         num2++;
+        }
+        if ((num1>=2)||(num2>=2))     //如果计算机或者用户赢了两局，则跳出
+        {   
+        System.out.println("Game over");   //游戏结束 
+        System.out.println((num1>num2)?"PC win!":"You win!"); //输出赢家
+        break;
+        }
+        
+        }
+    } 
+
+    }
