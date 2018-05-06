@@ -1,0 +1,57 @@
+import javax.swing.JOptionPane;
+
+public class Kousuan {
+	public static void main(String[] args) {
+		int num1,num2,score=0;
+		float result_right = 0;
+		
+		String str1=JOptionPane.showInputDialog("请输入进行口算的题数:");
+		int quantity=Integer.parseInt(str1);//quantity表示题数
+		
+		String str2=JOptionPane.showInputDialog("请输入口算题中操作数的范围(20表示取值在1-20之间）:");
+	    int range=Integer.parseInt(str2);//range表示范围 
+	    
+		
+	    String str3=JOptionPane.showInputDialog("请输入题中涉及的运算,以空格间隔:");
+	    String optArry[]=str3.split(" ");//optArry数组用于存放操作符
+		int opt_len=optArry.length;
+		
+		
+		for(int i=0;i<quantity;i++)//进入随机产生操作数、操作符并进行得分统计的循环
+		{
+			
+			num1=1+(int)(Math.random()*range);
+			num2=1+(int)(Math.random()*range);
+			
+			int index=(int)(Math.random()*opt_len);//index表示随机抽到的数组的下标，以此选择运算符
+			//System.out.println("下标是:"index);
+			switch(optArry[index])
+			{
+			case "+":
+				result_right=num1+num2;
+				break;
+			case "-":
+				result_right=num1-num2;
+				break;
+			case "*":
+				result_right=num1*num2;
+				break;
+			case "/":
+				result_right=num1/num2;
+				break;
+			}
+			String str4=JOptionPane.showInputDialog("请计算："+num1+optArry[index]+num2+"=");
+	        float result=Integer.parseInt(str4);//result是user计算的答案
+		    if(result==result_right)
+		    {
+		    	score++;
+		    	System.out.println("计算正确！加一分");
+		    }else
+		    {
+		    	System.out.println("计算错误！");
+		    }
+
+		}
+		System.out.println("最后的分为："+score+"  "+"正确题数为："+score+"个。");
+	}
+}
